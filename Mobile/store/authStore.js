@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_URL } from "../constants/api";
+import { API_URL } from "@/constants/api";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -24,6 +24,8 @@ export const useAuthStore = create((set) => ({
       });
 
       const data = await response.json();
+
+      console.log(data)
 
       if (!response.ok) throw new Error(data.message || "Something went wrong");
 

@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import job from "./lib/cron.js";
+import job from "./src/lib/cron.js";
 
-import authRoutes from "./routes/authRoutes.js";
-import bookRoutes from "./routes/bookRoutes.js";
+import authRoutes from "./src/routes/authRoutes.js";
+import bookRoutes from "./src/routes/bookRoutes.js";
 
-import { connectDB } from "./lib/db.js";
+import { connectDB } from "./src/lib/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

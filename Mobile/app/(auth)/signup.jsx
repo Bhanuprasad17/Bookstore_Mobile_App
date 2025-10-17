@@ -33,8 +33,10 @@ export default function Signup() {
 
   const handleSignUp = async () => {
     const result = await register(username, email, password);
+    console.log('hi')
 
     if (result.success) {
+      console.log('hi2')
       router.replace("/");
     } else {
       Alert.alert("Error", result.error);
