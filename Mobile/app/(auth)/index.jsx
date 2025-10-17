@@ -9,9 +9,9 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 import styles from "../../assets/styles/login.styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
 
@@ -21,23 +21,12 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { isLoading, login, isCheckingAuth, user } = useAuthStore();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (user) {
-      router.replace("/");
-    }
-  }, [user]);
+  const { isLoading, login, isCheckingAuth } = useAuthStore();
 
   const handleLogin = async () => {
     const result = await login(email, password);
 
-    if (result.success) {
-      router.replace("/");
-    } else {
-      Alert.alert("Error", result.error);
-    }
+    if (!result.success) Alert.alert("Error", result.error);
   };
 
   if (isCheckingAuth) return null;

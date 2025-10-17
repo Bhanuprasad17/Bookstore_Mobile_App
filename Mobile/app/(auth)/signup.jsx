@@ -11,7 +11,7 @@ import {
 import styles from "../../assets/styles/signup.styles";
 import { Ionicons } from "@expo/vector-icons";
 import COLORS from "../../constants/colors";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
 
@@ -25,22 +25,10 @@ export default function Signup() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      router.replace("/");
-    }
-  }, [user]);
-
   const handleSignUp = async () => {
     const result = await register(username, email, password);
-    console.log('hi')
 
-    if (result.success) {
-      console.log('hi2')
-      router.replace("/");
-    } else {
-      Alert.alert("Error", result.error);
-    }
+    if (!result.success) Alert.alert("Error", result.error);
   };
 
   return (
@@ -131,14 +119,13 @@ export default function Signup() {
               </View>
             </View>
 
-            
             {/* SIGNUP BUTTON */}
-            <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={isLoading} >
+            <TouchableOpacity style={styles.button} onPress={handleSignUp} disabled={isLoading}>
               {isLoading ? (
                 <ActivityIndicator color="#fff" />
               ) : (
                 <Text style={styles.buttonText}>Sign Up</Text>
-                )}
+              )}
             </TouchableOpacity>
 
             {/* FOOTER */}
